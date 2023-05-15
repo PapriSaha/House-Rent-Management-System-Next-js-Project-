@@ -2,11 +2,13 @@ import MyLayout from "@/pages/component/layout"
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from 'next/router'
+import SessionCheck from '../../../component/sessioncheck'
 
 export default function ManagerProfile({ data } ) {
 const router = useRouter();
     return (
       <>
+      <SessionCheck/>
       <MyLayout title="Manager"/>
    
 
@@ -25,7 +27,7 @@ const router = useRouter();
  export async function getServerSideProps(context) {
  const id=context.params.id;
 
-    const response = await axios.get('http://localhost:3000/admin/findmanager/'+id);
+    const response = await axios.get('https://house-rent-management-system-production.up.railway.app/admin/findmanager/'+id);
     const data = await response.data;
    
 return { props: { data } }

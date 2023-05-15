@@ -4,6 +4,7 @@ import axios from 'axios';
 import MyHeader from '@/pages/component/header';
 import TenantLayout from '@/pages/component/tenantdata';
 import MyDashboard from "@/pages/component/dashboard"
+import MyLayout from "@/pages/component/layout"
 
 export default function TenantIDPage({ data }) {
   const [inputValue, setInputValue] = useState();
@@ -24,7 +25,9 @@ export default function TenantIDPage({ data }) {
   return (
     <>
       <MyHeader/>
+      <MyLayout/>
       <MyDashboard title="Find Tenants"/><br/>
+      <div className="p-24 flex justify-center items-center" align="center" style={{ background: 'linear-gradient(204deg, rgba(204,255,229,1) 0%, rgba(204,255,229,1) 100%)' }}>
       <h3 align="center">Find Tenants by ID</h3><br/>
       <form align="center" onSubmit={handleFormSubmit}>
         <input type="text" value={inputValue} onChange={handleInputChange} /><br/><br/>
@@ -35,6 +38,7 @@ export default function TenantIDPage({ data }) {
    <TenantLayout data={data}/>
       : data.status }
     </h4>
+    </div>
       
     </>
   );
@@ -43,7 +47,7 @@ export default function TenantIDPage({ data }) {
 export async function getServerSideProps({ query }) {
   const inputValue = query.inputValue;
   try {
-  const response = await axios.get('http://localhost:3000/admin/findtenant/'+inputValue);
+  const response = await axios.get('https://house-rent-management-system-production.up.railway.app/admin/findtenant/'+inputValue);
   const data = await response.data;
 
   return {

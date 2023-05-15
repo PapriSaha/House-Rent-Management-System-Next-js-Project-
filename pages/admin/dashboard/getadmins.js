@@ -8,6 +8,7 @@ export default function GetAdmins({ data }) {
     
   return (
       <>
+      
       <MyHeader/>
        <MyDashboard title="Get Admins"/>
       <h2 align="center">All Admins</h2>
@@ -25,7 +26,7 @@ export default function GetAdmins({ data }) {
   
  export async function getServerSideProps() {
  
-      const response = await axios.get('http://localhost:3000/admin/adminindex');
+      const response = await axios.get('https://house-rent-management-system-production.up.railway.app/admin/adminindex');
       const data = await response.data;
     
   return { props: { data } }

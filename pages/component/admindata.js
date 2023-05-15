@@ -12,7 +12,7 @@ export default function AdminLayout({data})
       <h3>Address: {data.address}</h3>
       <h3>Date of Birth: {data.dob}</h3>
       <h3>Picture: </h3>
-      <Image src={"http:/localhost:3000/admin/getimage/"+data.filename} alt="me" width="150" height="150" />
+      <Image src={"https://house-rent-management-system-production.up.railway.app/admin/getimage/"+data.filename} alt="me" width="150" height="150" />
         </>
     )
 }

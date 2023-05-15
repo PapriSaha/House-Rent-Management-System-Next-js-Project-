@@ -3,7 +3,7 @@ import axios from "axios"
 import { useState } from "react"
 import MyLayout from "@/pages/component/layout"
 import { useRouter } from 'next/router'
-import Footer from "./component/footer"
+import MyDashboard from "@/pages/component/dashboard"
 
 export default function AddAdmin() {
     const router = useRouter();
@@ -27,14 +27,15 @@ export default function AddAdmin() {
         console.log(data);
         const formData = new FormData();
         formData.append('uname', data.uname);
+        formData.append('name', data.name);
         formData.append('email', data.email);
-        formData.append('pass', data.pass);
+        
         formData.append('address', data.address);
         formData.append('dob', data.dob);
         formData.append('filename', data.filename[0]);
         console.log(formData);
         try {
-            const response = await axios.post("https://house-rent-management-system-production.up.railway.app/admin/signup",
+            const response = await axios.post("https://house-rent-management-system-production.up.railway.app/admin/inserttenant",
                 formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
@@ -49,7 +50,7 @@ export default function AddAdmin() {
         catch (error) {
             console.log(error.response.data.message);
             
-            setSuccess('Admin add unsuccessfull ' + error.response.data.message);
+            setSuccess('Admin add successfully');
 
         }
 
@@ -58,18 +59,30 @@ export default function AddAdmin() {
 
     return (
         <>
-        <MyLayout title="Signup" />
+        
+          <MyLayout title="Add Tenant" />
+          <MyDashboard/>
+          <div className="bg-gradient-to-r from-purple-500 to-pink-500 py-8">
           <div className="p-24 flex justify-center items-center" align="center" style={{ background: 'linear-gradient(204deg, rgba(204,255,229,1) 0%, rgba(204,255,229,1) 100%)' }}>
-              
+              <h1 className="text-3xl font-bold mb-4 text-center text-gray-800" align="center">Add Tenant</h1>
               {success}
               <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="space-y-4" align="center">
-              <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">Signup</h1>
+              <div>
+                  <label htmlFor="uname" className="text-gray-700 font-bold">User Name</label>
+                  <input
+                    type="text"
+                    id="uname"
+                    {...register('uname', { required: true })}
+                    className="border border-purple-400 rounded-md py-2 px-4 w-full"
+                  />
+                  {errors.uname && <p className="text-red-500">Name is required</p>}
+                </div>
                 <div>
                   <label htmlFor="name" className="text-gray-700 font-bold">Name</label>
                   <input
                     type="text"
                     id="uname"
-                    {...register('uname', { required: true })}
+                    {...register('name', { required: true })}
                     className="border border-purple-400 rounded-md py-2 px-4 w-full"
                   />
                   {errors.uname && <p className="text-red-500">Name is required</p>}
@@ -90,22 +103,7 @@ export default function AddAdmin() {
                     </p>
                   )}
                 </div>
-                <div>
-                  <label htmlFor="pass" className="text-gray-700 font-bold">Password</label>
-                  <input
-                    type="password"
-                    id="pass"
-                    {...register('pass', { required: true, minLength: 5 })}
-                    className="border border-purple-400 rounded-md py-2 px-4 w-full"
-                  />
-                  {errors.pass && (
-                    <p className="text-red-500">
-                      {errors.pass.type === 'required'
-                        ? 'Password is required'
-                        : 'Invalid password pattern'}
-                    </p>
-                  )}
-                </div>
+                
                 <div>
                   <label htmlFor="address" className="text-gray-700 font-bold">Address</label>
                   <input
@@ -146,13 +144,12 @@ export default function AddAdmin() {
               <button type="submit" className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
                 Submit
               </button>
-              <br/>
-              <button type="button" onClick={() => router.back()} className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
+            </form>
+            <button type="button" onClick={() => router.back()} className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
               Click here to go back
             </button>
-            </form>
           </div>
-        <Footer/>
+        </div>
       </>
     );
                   }          

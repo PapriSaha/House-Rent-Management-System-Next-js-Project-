@@ -43,7 +43,7 @@ export default function MyPage({ data }) {
 export async function getServerSideProps({ query }) {
   const inputValue = query.inputValue;
   try {
-  const response = await axios.get('http://localhost:3000/admin/findhouse/'+inputValue);
+  const response = await axios.get('https://house-rent-management-system-production.up.railway.app/admin/findhouse/'+inputValue);
   const data = await response.data;
 
   return {

@@ -3,7 +3,7 @@ import axios from "axios"
 import { useState } from "react"
 import MyLayout from "@/pages/component/layout"
 import { useRouter } from 'next/router'
-import Footer from "./component/footer"
+import MyDashboard from "@/pages/component/dashboard"
 
 export default function AddAdmin() {
     const router = useRouter();
@@ -58,12 +58,14 @@ export default function AddAdmin() {
 
     return (
         <>
-        <MyLayout title="Signup" />
+        
+          <MyLayout title="Add Admin" />
+          <MyDashboard/>
+          <div className="bg-gradient-to-r from-purple-500 to-pink-500 py-8">
           <div className="p-24 flex justify-center items-center" align="center" style={{ background: 'linear-gradient(204deg, rgba(204,255,229,1) 0%, rgba(204,255,229,1) 100%)' }}>
-              
+              <h1 className="text-3xl font-bold mb-4 text-center text-gray-800" align="center">Add Admin</h1>
               {success}
               <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="space-y-4" align="center">
-              <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">Signup</h1>
                 <div>
                   <label htmlFor="name" className="text-gray-700 font-bold">Name</label>
                   <input
@@ -146,13 +148,12 @@ export default function AddAdmin() {
               <button type="submit" className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
                 Submit
               </button>
-              <br/>
-              <button type="button" onClick={() => router.back()} className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
+            </form>
+            <button type="button" onClick={() => router.back()} className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
               Click here to go back
             </button>
-            </form>
           </div>
-        <Footer/>
+        </div>
       </>
     );
                   }          
