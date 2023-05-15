@@ -3,13 +3,15 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
+
 module.exports = {
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
+        protocol: 'https',
+        hostname: 'house-rent-management-system-production.up.railway.app',
+        port: '3000',    
       },
     ],
   },
